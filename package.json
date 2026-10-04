@@ -1,0 +1,36 @@
+{
+  "name": "motion-cad",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n bridge,web -c cyan,magenta \"npm:dev:bridge\" \"npm:dev:web\"",
+    "dev:web": "vite --host :: --force",
+    "build:native": "mkdir -p bridge/bin && clang bridge/native/leap_bridge.c -I\"/Applications/Ultraleap Hand Tracking.app/Contents/LeapSDK/include\" -L\"/Applications/Ultraleap Hand Tracking.app/Contents/LeapSDK/lib\" -lLeapC -Wl,-rpath,\"/Applications/Ultraleap Hand Tracking.app/Contents/LeapSDK/lib\" -o bridge/bin/leap_bridge",
+    "predev:bridge": "npm run build:native",
+    "dev:bridge": "tsx watch bridge/server.ts",
+    "build": "tsc -b && vite build",
+    "test": "tsx --test src/**/*.test.ts",
+    "typecheck": "tsc -b",
+    "preview": "vite preview --host ::"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.4.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "three": "^0.180.0",
+    "ws": "^8.18.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.7.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@types/three": "^0.180.0",
+    "@types/ws": "^8.18.1",
+    "@vitejs/plugin-react": "^5.0.4",
+    "concurrently": "^9.2.1",
+    "tsx": "^4.20.6",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.9"
+  }
+}

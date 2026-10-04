@@ -1,0 +1,6 @@
+node_modules/
+dist/
+bridge/bin/
+*.log
+motion-cad-preview.png
+.DS_Store
